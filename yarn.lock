@@ -30,7 +30,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.15.5, @babel/core@npm:^7.15.0":
+"@babel/core@npm:7.15.5, @babel/core@npm:^7.15.0, @babel/core@npm:^7.15.5":
   version: 7.15.5
   resolution: "@babel/core@npm:7.15.5"
   dependencies:
@@ -3233,6 +3233,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "filbunke@workspace:."
   dependencies:
+    "@babel/core": ^7.15.5
     "@babel/preset-typescript": ^7.15.0
     "@rails/actioncable": latest
     "@rails/activestorage": latest
