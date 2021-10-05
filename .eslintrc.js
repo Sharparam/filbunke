@@ -13,5 +13,11 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended'
   ],
-  rules: {}
+  rules: {},
+  ignorePatterns: [
+    '/public/assets/**',
+    '/public/packs/**',
+    'node_modules',
+    'tmp'
+  ]
 };
