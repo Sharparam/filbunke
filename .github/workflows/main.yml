@@ -27,7 +27,7 @@ jobs:
           node-version: ${{ env.FILBUNKE_NODE_VERSION_SPEC }}
           cache: yarn
       - name: Install Node packages
-        run: yarn install --pure-lockfile
+        run: yarn install --immutable
 
       - name: Rubocop
         run: bundle exec rubocop --parallel
@@ -58,7 +58,7 @@ jobs:
           node-version: ${{ env.FILBUNKE_NODE_VERSION_SPEC }}
           cache: yarn
       - name: Install Node packages
-        run: yarn install --pure-lockfile
+        run: yarn install --immutable
 
       - name: Prepare test database
         run: bundle exec rails db:prepare
