@@ -1,0 +1,68 @@
+name: Main
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - '*'
+
+env:
+  FILBUNKE_NODE_VERSION_SPEC: '16'
+
+jobs:
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.FILBUNKE_NODE_VERSION_SPEC }}
+      - name: Install Node packages
+        run: yarn install --pure-lockfile
+
+      - name: Rubocop
+        run: bundle exec rubocop --parallel
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12-alpine
+        env:
+          POSTGRES_USER: filbunke
+          POSTGRES_DB: filbunke_test
+          POSTGRES_PASSWORD: ''
+        ports: ['5432:5432']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.FILBUNKE_NODE_VERSION_SPEC }}
+          cache: yarn
+      - name: Install Node packages
+        run: yarn install --pure-lockfile
+
+      - name: Prepare test database
+        run: bundle exec rails db:prepare
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: filbunke
+
+      - name: Run tests
+        run: bundle exec rake test
