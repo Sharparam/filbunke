@@ -1,6 +1,8 @@
-import { webpackConfig, merge } from '@rails/webpacker';
-import ForkTSCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-export default merge(webpackConfig, {
+const { webpackConfig, merge } = require('@rails/webpacker');
+const ForkTSCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
+module.exports = merge(webpackConfig, {
   plugins: [new ForkTSCheckerWebpackPlugin()]
 });

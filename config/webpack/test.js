@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-import webpackConfig from './base';
+const webpackConfig = require('./base');
 
-export default webpackConfig;
+module.exports = webpackConfig;
