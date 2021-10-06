@@ -18,6 +18,7 @@ module.exports = {
     '/public/assets/**',
     '/public/packs/**',
     'node_modules',
+    '/vendor',
     'tmp'
   ]
 };
