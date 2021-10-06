@@ -32,7 +32,7 @@ jobs:
       - name: Rubocop
         run: bundle exec rubocop --parallel
       - name: ESLint
-        run: yarn lint
+        run: yarn lint --debug
   tests:
     name: Tests
     runs-on: ubuntu-latest
