@@ -36,13 +36,16 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      POSTGRES_USER: filbunke
+      POSTGRES_DB: filbunke_test
+      DATABASE_URL: 'postgresql://filbunke@localhost:5432/filbunke_test'
     services:
       postgres:
         image: postgres:12-alpine
         env:
-          POSTGRES_USER: filbunke
-          POSTGRES_DB: filbunke_test
-          POSTGRES_PASSWORD: filbunke
+          POSTGRES_PASSWORD: ''
         ports: ['5432:5432']
     steps:
       - name: Checkout
@@ -62,9 +65,6 @@ jobs:
 
       - name: Prepare test database
         run: bundle exec rails db:prepare
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: 'postgresql://filbunke:filbunke@localhost:5432/filbunke_test'
 
       - name: Run tests
         run: bundle exec rake test
