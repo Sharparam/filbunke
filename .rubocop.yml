@@ -1,5 +1,40 @@
 require:
   - rubocop-rails
 
+inherit_mode:
+  merge:
+    - Include
+
 AllCops:
   NewCops: enable
+  Exclude:
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+
+Layout/LineLength:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*'
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
