@@ -25,6 +25,14 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'argon2', '~> 2.1'
+# Use Devise for user system
+gem 'devise', '~> 4.8'
+gem 'devise-encryptable', '~> 0.2'
+gem 'omniauth-github', '~> 2.0'
+gem 'omniauth-gitlab', '~> 3.0'
+gem 'omniauth-google-oauth2', '~> 1.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
