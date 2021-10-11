@@ -30,4 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    template:
+      title:
+        zero: 'No errors prevented this %{model} from being saved'
+        one: '%{count} error prevented this %{model} from being saved'
+        other: '%{count} errors prevented this %{model} from being saved'
+      title_with_action:
+        zero: 'No errors prevented this %{model} from being %{action}'
+        one: '%{count} error prevented this %{model} from being %{action}'
+        other: '%{count} errors prevented this %{model} from being %{action}'
+      message: 'Please fix the below errors and try again'

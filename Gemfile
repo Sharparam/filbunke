@@ -13,6 +13,8 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 # Use Slim for templates
 gem 'slim-rails', '~> 3.3.0'
+# Use simple form for nicer form syntax
+gem 'simple_form', '~> 5.1'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

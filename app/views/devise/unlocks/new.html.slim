@@ -1,0 +1,10 @@
+.columns.is-mobile.is-centered: .column.is-half
+  h2.title Resend unlock instructions
+
+  = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+    = f.error_messages
+
+    = f.input :email, required: true, autofocus: true, input_html: { autocomplete: 'email' }
+    = f.button :submit, 'Resend unlock instructions', class: 'is-primary is-fullwidth'
+
+  = render 'devise/shared/links'

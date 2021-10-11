@@ -1,0 +1,15 @@
+.columns.is-mobile.is-centered: .column.is-half
+  h2.title Change your password
+
+  = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+    = f.error_messages
+    = f.input :reset_password_token, as: :hidden
+
+    = f.input :password, 'New password', required: true, autofocus: true, input_html: { autocomplete: 'new-password' },
+      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+
+    = f.input :password_confirmation, required: true, input_html: { autocomplete: 'new-password' }
+
+    = f.button :submit, 'Change my password', class: 'is-primary is-fullwidth'
+
+  = render 'devise/shared/links'

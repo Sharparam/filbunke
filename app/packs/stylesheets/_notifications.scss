@@ -1,0 +1,9 @@
+.notification {
+  &.is-notice {
+    @extend .is-info;
+  }
+
+  &.is-alert {
+    @extend .is-danger;
+  }
+}

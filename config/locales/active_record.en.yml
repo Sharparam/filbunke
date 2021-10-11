@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    actions:
+      create: 'create'
+      created: 'created'
+      send: 'send'
+      sent: 'sent'
+      save: 'save'
+      saved: 'saved'

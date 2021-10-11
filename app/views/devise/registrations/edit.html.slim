@@ -1,53 +1,30 @@
-h2 Edit #{resource_name.to_s.humanize}
+.columns.is-mobile.is-centered: .column.is-half
+  h2.title Edit #{resource_name.to_s.humanize}
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
+  .mb-5 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = f.error_messages
 
-  .field
-    = f.label :username
-    br
-    = f.text_field :username, autofucs: true, autocomplete: 'username'
+    = f.input :username, required: false, input_html: { class: 'is-static' }
+    = f.input :email, required: true, input_html: { autocomplete: 'email' }, placeholder: 'me@example.com'
 
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autocomplete: 'email'
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      div Currently waiting confirmation for: #{resource.unconfirmed_email}
 
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div Currently waiting confirmation for: #{resource.unconfirmed_email}
+    = f.input :password, input_html: { autocomplete: 'new-password' },
+      hint: ("Leave blank if you don't want to change it#{@minimum_password_length ? ", #{@minimum_password_length} characters minimum" : ''}")
 
-  .field
-    = f.label :password
-    i
-      |  (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: 'new-password'
-    - if @minimum_password_length
-      br
-      em #{@minimum_password_length} characters minimum
+    = f.input :password_confirmation, input_html: { autocomplete: 'new-password' }
+    = f.input :current_password, input_html: { autocomplete: 'current-password' },
+      hint: 'We need your current password to confirm your changes'
 
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: 'new-password'
+    = f.button :submit, 'Update', class: 'is-primary is-fullwidth'
 
-  .field
-    = f.label :current_password
-    i
-      |  (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: 'current-password'
+  = render partial: 'devise/shared/omniauth_links', locals: { prefix: 'Add' }
 
-  .actions
-    = f.submit 'Update'
+  h3.title Danger zone
 
-= render partial: 'devise/shared/omniauth_links', locals: { prefix: 'Add' }
-
-h3 Cancel my account
-
-p
-  ' Unhappy?
   = button_to 'Cancel my account', registration_path(resource_name),
-    data: { confirm: 'Are you sure?' }, method: :delete
+    data: { confirm: 'Are you sure?' }, method: :delete,
+    class: 'button is-danger is-fullwidth'
 
-= link_to 'Back', :back
+  = link_to 'Back', :back, class: 'button is-ghost is-fullwidth'

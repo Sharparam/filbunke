@@ -21,3 +21,15 @@ h5 {
 h6 {
   @extend .is-size-6;
 }
+
+div.field > div.control > label.radio > input[type="radio"] {
+  margin-right: 0.25rem;
+}
+
+.form-errors .content > ul:first-child {
+  margin-top: 0;
+}
+
+.control > label.checkbox > input[type="checkbox"] {
+  margin-right: 0.4rem;
+}
