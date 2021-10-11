@@ -49,8 +49,8 @@ class User < ApplicationRecord
   end
 
   def apply_omniauth(auth)
-    self.username = auth.info.nickname || auth.info.username unless username.present?
-    self.email = auth.info.email unless email.present?
+    self.username = auth.info.nickname || auth.info.username if username.blank?
+    self.email = auth.info.email if email.blank?
     authentications.build provider: auth.provider, uid: auth.uid
     skip_confirmation! if new_record? && email.present?
     self
