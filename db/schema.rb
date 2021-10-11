@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2021_10_11_135616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid", unique: true
-    t.index ["provider"], name: "index_authentications_on_provider"
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
