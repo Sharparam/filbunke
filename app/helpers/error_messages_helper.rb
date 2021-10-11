@@ -21,8 +21,8 @@ module ErrorMessagesHelper
 
     [
       options,
-      first.model_name.human.downcase,
-      first.errors.messages.size
+      first&.model_name&.human&.downcase || t('errors.template.unknown_model'),
+      first&.errors&.messages&.size || 0
     ]
   end
 
@@ -59,14 +59,4 @@ module ErrorMessagesHelper
         end
     end
   end
-
-  # rubocop:disable Rails/HelperInstanceVariable
-  module FormBuilderAdditions
-    def error_messages(options = {})
-      @template.error_messages_for(@object, options)
-    end
-  end
-  # rubocop:enable Rails/HelperInstanceVariable
 end
-
-ActionView::Helpers::FormBuilder.include ErrorMessagesHelper::FormBuilderAdditions

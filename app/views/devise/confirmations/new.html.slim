@@ -2,7 +2,7 @@
   h2.title Resend confirmation instructions
 
   = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-    = f.error_messages
+    = render 'devise/shared/error_messages', resource: resource
     = f.input :email, required: true, autofocus: true, input_html: { autocomplete: 'email' },
       placeholder: 'me@example.com',
       value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
