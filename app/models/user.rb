@@ -14,26 +14,15 @@ class User < ApplicationRecord
                          multiline: true
                        }
 
-  attr_writer :login
+  has_many :authentications, dependent: :destroy
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.username = auth.info.nickname
-      user.email = auth.info.email
-      user.skip_confirmation!
-    end
-  end
+  attr_writer :login
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if (data = session['devise.github_data'])
-        user.username = data['info']['nickname'] if user.username.blank?
-        user.email = data['info']['email'] if user.email.blank?
-      elsif (data = session['devise.gitlab_data'])
-        user.username = data['info']['username'] if user.username.blank?
-        user.email = data['info']['email'] if user.email.blank?
-      elsif (data = session['devise.google_data'])
-        user.email = data['info']['email'] if user.email.blank?
+      if (data = session['devise.oauth_data'])
+        user.username = data[:username] if user.username.blank?
+        user.email = data[:email] if user.email.blank?
       end
     end
   end
@@ -59,12 +48,20 @@ class User < ApplicationRecord
     find_by conditions
   end
 
+  def apply_omniauth(auth)
+    self.username = auth.info.nickname || auth.info.username unless username.present?
+    self.email = auth.info.email unless email.present?
+    authentications.build provider: auth.provider, uid: auth.uid
+    skip_confirmation! if new_record? && email.present?
+    self
+  end
+
   def login
     @login || username || email
   end
 
   def password_required?
-    super && provider.blank?
+    super && authentications.empty?
   end
 
   def send_devise_notification(notification, *args)

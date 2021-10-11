@@ -282,7 +282,7 @@ Devise.setup do |config|
   end
   config.omniauth :github, gh_client_id, gh_client_secret, scope: 'read:user,user:email'
   gl_client_id = ENV.fetch('GITLAB_CLIENT_ID') do
-    Rails.application.credentials.dig :github, :client_id
+    Rails.application.credentials.dig :gitlab, :client_id
   end
   gl_client_secret = ENV.fetch('GITLAB_CLIENT_SECRET') do
     Rails.application.credentials.dig :gitlab, :client_secret

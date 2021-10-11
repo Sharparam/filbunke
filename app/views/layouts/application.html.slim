@@ -14,11 +14,17 @@ html
     header
       div
         - if user_signed_in?
-          p Welcome, #{current_user.login}
+          p
+            ' Welcome,
+            = link_to current_user.login, edit_user_registration_path
           = link_to 'Log out', destroy_user_session_path, method: :delete
         - else
           => link_to 'Log in', new_user_session_path
           ' or
           = link_to 'Sign up', new_user_registration_path
+      - if flash.any?
+        div
+          - flash.each do |key, value|
+            = content_tag :div, value, class: "flash #{key}"
     main
       = content_for?(:content) ? yield(:content) : yield
