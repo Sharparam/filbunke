@@ -8,6 +8,8 @@ class User < ApplicationRecord
          :confirmable, :trackable, :omniauthable,
          omniauth_providers: %i[github gitlab google_oauth2]
 
+  rolify
+
   validates :username, presence: true, uniqueness: { case_sensitive: false },
                        format: {
                          with: /^[A-Za-z0-9_.\-]+$/,
@@ -17,6 +19,8 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
 
   attr_writer :login
+
+  delegate :can?, :cannot?, to: :ability
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -48,20 +52,24 @@ class User < ApplicationRecord
     find_by conditions
   end
 
-  def apply_omniauth(auth)
-    self.username = auth.info.nickname || auth.info.username if username.blank?
-    self.email = auth.info.email if email.blank?
-    authentications.build provider: auth.provider, uid: auth.uid
-    skip_confirmation! if new_record? && email.present?
-    self
-  end
-
   def login
     @login || username || email
   end
 
   def password_required?
     super && authentications.empty?
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
+
+  def apply_omniauth(auth)
+    self.username = auth.info.nickname || auth.info.username if username.blank?
+    self.email = auth.info.email if email.blank?
+    authentications.build provider: auth.provider, uid: auth.uid
+    skip_confirmation! if new_record? && email.present?
+    self
   end
 
   def send_devise_notification(notification, *args)

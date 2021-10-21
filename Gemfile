@@ -35,6 +35,9 @@ gem 'omniauth-github', '~> 2.0'
 gem 'omniauth-gitlab', '~> 3.0'
 gem 'omniauth-google-oauth2', '~> 1.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
+# Use CanCanCan for permissions/authorization
+gem 'cancancan', '~> 3.3'
+gem 'rolify', '~> 6.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
