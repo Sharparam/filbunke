@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: '/'
+    versioning-strategy: increase-if-necessary
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - 'dependencies:'bundler'
+    assignees:
+      - Sharparam
+    reviewers:
+      - Sharparam
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - 'dependencies:github-actions'
+    assignees:
+      - Sharparam
+    reviewers:
+      - Sharparam
