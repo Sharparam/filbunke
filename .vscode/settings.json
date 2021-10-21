@@ -3,5 +3,6 @@
     "solargraph.diagnostics": true,
     "solargraph.completion": true,
     "solargraph.definitions": true,
-    "solargraph.formatting": true
+    "solargraph.formatting": true,
+    "ruby.useBundler": true
 }
