@@ -7,7 +7,7 @@ updates:
       interval: daily
     labels:
       - dependencies
-      - 'dependencies:'bundler'
+      - 'dependencies:bundler'
     assignees:
       - Sharparam
     reviewers:
