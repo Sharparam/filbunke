@@ -1,0 +1,91 @@
+version: '3.9'
+volumes:
+  db:
+  redis:
+  bundle:
+  node_modules:
+  rails_cache:
+  packs:
+services:
+  app: &app
+    build:
+      context: '.docker'
+      dockerfile: Dockerfile.dev
+      args:
+        RUBY_VERSION: '3.0.2'
+        BUNDLER_VERSION: '2.2.29'
+    image: 'filbunke-dev:0.1.0'
+    environment: &env
+      RAILS_ENV: ${RAILS_ENV:-development}
+    tmpfs:
+      - /tmp
+      - /app/tmp/pids
+  backend: &backend
+    <<: *app
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app:cached
+      - rails_cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+      # - .docker/.psqlrc:/root/.psqlrc:ro
+    environment:
+      <<: *env
+      REDIS_URL: redis://redis:6379/
+      DATABASE_URL: postgres://postgres:postgres@db:5432
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+      HISTFILE: /app/log/.bash_history
+      PSQL_HISTFILE: /app/log/.psql_history
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  rails:
+    <<: *backend
+    entrypoint: ['/bin/sh', '-cx']
+    command:
+      - |
+        bundle check || bundle install
+        yarn install
+        bundle exec rails db:prepare
+        bundle exec rails server -b 0.0.0.0
+    ports:
+      - '3000:3000'
+  webpacker:
+    <<: *app
+    command: ./bin/webpack-dev-server
+    ports:
+      - '3035:3035'
+    volumes:
+      - .:/app:cached
+      - bundle:/usr/local/bundle
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+    environment:
+      <<: *env
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+  db:
+    image: postgres:12-alpine
+    volumes:
+      # - .psqlrc:/root/.psqlrc:ro
+      - db:/var/lib/postgresql/data
+      - ./log:/root/log:cached
+    environment:
+      PSQL_HISTFILE: /root/log/.psql_history
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+      interval: 5s
+  redis:
+    image: redis:4.0-alpine
+    volumes:
+      - redis:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
