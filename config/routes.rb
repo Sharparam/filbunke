@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   get 'about', to: 'home#about', as: :about
   get 'contact', to: 'home#contact', as: :contact
 
+  resources :user_files, path: 'files', param: :uuid
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 end

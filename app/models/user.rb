@@ -17,6 +17,7 @@ class User < ApplicationRecord
                        }
 
   has_many :authentications, dependent: :destroy
+  has_many :user_files, dependent: :destroy
 
   attr_writer :login
 

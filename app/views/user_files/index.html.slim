@@ -1,0 +1,25 @@
+h1 Listing user_files
+
+table
+  thead
+    tr
+      th File
+      th User
+      th Visibility
+      th
+      th
+      th
+
+  tbody
+    - @user_files.each do |user_file|
+      tr
+        td = user_file.file
+        td = user_file.user
+        td = user_file.visibility
+        td = link_to 'Show', user_file
+        td = link_to 'Edit', edit_user_file_path(user_file)
+        td = link_to 'Destroy', user_file, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New User file', new_user_file_path

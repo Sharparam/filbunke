@@ -1,0 +1,17 @@
+p#notice = notice
+
+p
+  strong File:
+  = @user_file.file
+
+p
+  strong User:
+  = @user_file.user
+
+p
+  strong Visibility:
+  = @user_file.visibility
+
+=> link_to 'Edit', edit_user_file_path(@user_file)
+'|
+=< link_to 'Back', user_files_path

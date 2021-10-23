@@ -1,0 +1,19 @@
+= form_for @user_file do |f|
+  - if @user_file.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user_file.errors.count, 'error')} prohibited this user_file from being saved:"
+      ul
+        - @user_file.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :file
+    = f.file_field :file
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :visibility
+    /= f.number_field :visibility
+    = f.select :visibility, UserFile.visibilities.map { |k, _| [k.humanize, k] }
+  .actions = f.submit
