@@ -18,12 +18,10 @@ class UserFilesController < ApplicationController
   end
 
   # GET /files/new
-  def new
-  end
+  def new; end
 
   # GET /files/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /files or /files.json
   def create
