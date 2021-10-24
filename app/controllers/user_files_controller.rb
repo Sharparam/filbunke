@@ -2,20 +2,14 @@
 
 class UserFilesController < ApplicationController
   before_action :load_user_file, only: %i[show edit update destroy]
+  before_action :set_user_file, only: %i[new]
   load_and_authorize_resource find_by: :uuid
 
   # GET /files or /files.json
-  def index
-    logger.debug self.class.cancan_resource_class.new(self).send(:resource_instance)
-    logger.debug self.class.cancan_resource_class.new(self).send(:instance_name)
-  end
+  def index; end
 
   # GET /files/1 or /files/1.json
-  def show
-    logger.debug self.class.cancan_resource_class.new(self).send(:resource_instance)
-    logger.debug self.class.cancan_resource_class.new(self).send(:instance_name)
-    console
-  end
+  def show; end
 
   # GET /files/new
   def new; end
@@ -61,12 +55,16 @@ class UserFilesController < ApplicationController
 
   private
 
+  def set_user_file
+    @user_file = current_user.user_files.build
+  end
+
   def load_user_file
     @user_file = UserFile.find_by!(uuid: params[:uuid])
   end
 
   # Only allow a list of trusted parameters through.
   def user_file_params
-    params.require(:user_file).permit(:file, :user_id, :visibility)
+    params.require(:user_file).permit(:file, :visibility)
   end
 end
