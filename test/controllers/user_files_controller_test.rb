@@ -4,6 +4,7 @@ require 'test_helper'
 
 class UserFilesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in_and_confirm users(:one)
     @user_file = user_files(:one)
   end
 
@@ -19,7 +20,8 @@ class UserFilesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create user_file' do
     assert_difference('UserFile.count') do
-      post user_files_url, params: { user_file: { user_id: @user_file.user_id, visibility: @user_file.visibility } }
+      file_upload = fixture_file_upload('green_square.png', 'image/png')
+      post user_files_url, params: { user_file: { file: file_upload, visibility: @user_file.visibility } }
     end
 
     assert_redirected_to user_file_url(UserFile.last)
@@ -37,7 +39,7 @@ class UserFilesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update user_file' do
     patch user_file_url(@user_file),
-          params: { user_file: { user_id: @user_file.user_id, visibility: @user_file.visibility } }
+          params: { user_file: { visibility: @user_file.visibility } }
     assert_redirected_to user_file_url(@user_file)
   end
 
