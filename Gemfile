@@ -12,7 +12,7 @@ gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.5'
 # Use Slim for templates
-gem 'slim-rails', '~> 3.3.0'
+gem 'slim-rails', '~> 3.4.0'
 # Use simple form for nicer form syntax
 gem 'simple_form', '~> 5.1'
 # Use SCSS for stylesheets
