@@ -159,7 +159,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.5-x86_64-linux)
+    nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.9)
       faraday (>= 0.17.3, < 3.0)
@@ -285,7 +285,7 @@ GEM
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
-    slim-rails (3.4.0)
+    slim-rails (3.5.0)
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
@@ -372,7 +372,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.12)
   selenium-webdriver
   simple_form (~> 5.1)
-  slim-rails (~> 3.4.0)
+  slim-rails (~> 3.5.0)
   solargraph (~> 0.44)
   spring
   turbolinks (~> 5)
