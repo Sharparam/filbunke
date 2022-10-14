@@ -10,7 +10,7 @@ gem 'rails', '~> 7.0.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 5.5'
+gem 'puma', '~> 6.0'
 # Use Slim for templates
 gem 'slim-rails', '~> 3.5.0'
 # Use simple form for nicer form syntax
