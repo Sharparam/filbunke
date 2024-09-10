@@ -1,3 +1,5 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server
 js: bun run build --watch
 css: bun run watch:css
+redis: podman run --name filbunke-redis --replace --volume filbunke-redis-data:/data -p 3100:6379 -p 3110:8001 docker.io/redis/redis-stack:latest
+postgres: podman run --name filbunke-db --replace --volume filbunke-db:/var/lib/postgresql/data -p 3200:5432 -e POSTGRES_PASSWORD=postgres docker.io/postgres:16.4
