@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+    labels:
+      - dependencies
+      - dependencies:bundler
+    assignees:
+      - Sharparam
+    reviewers:
+      - Sharparam
+    open-pull-requests-limit: 10
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
+      - dependencies:github-actions
+    assignees:
+      - Sharparam
+    reviewers:
+      - Sharparam
+    open-pull-requests-limit: 10

@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "kaiwood.endwise",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "rvest.vs-code-prettier-eslint",
+        "stylelint.vscode-stylelint",
+        "shopify.ruby-lsp",
+        "castwide.solargraph"
+    ]
+}
