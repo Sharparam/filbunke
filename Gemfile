@@ -51,7 +51,9 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
-  gem "solargraph", require: false
+  # solargraph breaks stuff until it updates to use RBS 3.0:
+  # https://github.com/castwide/solargraph/pull/662
+  # gem "solargraph", require: false
 
   gem "foreman", require: false
 end
