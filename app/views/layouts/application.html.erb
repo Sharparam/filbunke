@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-100" data-bs-theme="auto">
   <head>
     <title><%= content_for(:title) || "Filbunke" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,7 +17,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="d-flex flex-column h-100">
+    <%= render "header" %>
+    <main class="container flex-shrink-0">
+      <%= yield %>
+    </main>
+    <%= render "footer" %>
   </body>
 </html>
