@@ -1,17 +1,3 @@
-# PostgreSQL. Versions 9.3 and up are supported.
-#
-# Install the pg driver:
-#   gem install pg
-# On macOS with Homebrew:
-#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
-#
-# Configure Using Gemfile
-# gem "pg"
-#
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -28,24 +14,10 @@ default: &default
 development:
   <<: *default
   database: filbunke_development
-
-  # The specified database role being used to connect to PostgreSQL.
-  # To create additional roles in PostgreSQL see `$ createuser --help`.
-  # When left blank, PostgreSQL will use the default role. This is
-  # the same name as the operating system user running Rails.
-  #username: filbunke
-
-  # The password associated with the PostgreSQL role (username).
-  #password:
-
-  # Connect on a TCP socket. Omitted by default since the client uses a
-  # domain socket that doesn't need configuration. Windows does not have
-  # domain sockets, so uncomment these lines.
-  #host: localhost
-
-  # The TCP port the server listens on. Defaults to 5432.
-  # If your server runs on a different port number, change accordingly.
-  #port: 5432
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 3200
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -62,6 +34,10 @@ development:
 test:
   <<: *default
   database: filbunke_test
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 3200
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
