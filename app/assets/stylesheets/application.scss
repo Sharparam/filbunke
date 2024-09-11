@@ -1,1 +1,7 @@
 @import 'bootstrap';
+
+@import 'icons';
+
+.theme-picker .dropdown-menu .active svg.bi {
+  display: block !important;
+}
